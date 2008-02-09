@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>WarehouseToDataMart</RootNamespace>
+    <AssemblyName>WarehouseToDataMart</AssemblyName>
+    <MyType>Windows</MyType>
+    <OptionStrict>On</OptionStrict>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>WarehouseToDataMart.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>WarehouseToDataMart.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MbUnit.Framework, Version=2.41.232.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\MbUnit\MbUnit.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=1.2.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\libs\Nhibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\DateInformation.vb" />
+    <Compile Include="DataMartAggregator.vb" />
+    <Compile Include="DataMart\PurchasesPerDayAggregateFact.vb" />
+    <Compile Include="DataMart\PurchasesPerPersonPerMonthAggregateFact.vb" />
+    <Compile Include="HibernateDataMartMapperFactory.vb" />
+    <Compile Include="DataMart\PersonDimension.vb" />
+    <Compile Include="DataMart\PurchaseFact.vb" />
+    <Compile Include="HibernateWarehouseMapperFactory.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="Warehouse\Person.vb" />
+    <Compile Include="WarehouseMoveProgram.vb" />
+    <Compile Include="Warehouse\Purchase.vb" />
+    <Compile Include="Repositories\IRepository.vb" />
+    <Compile Include="Repositories\Repository.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Warehouse\Mappings\DateInformation.hbm.xml" />
+    <Content Include="Warehouse\Mappings\Person.hbm.xml" />
+    <Content Include="DataMart\Mappings\PersonDimension.hbm.xml" />
+    <Content Include="Warehouse\Mappings\Purchase.hbm.xml" />
+    <Content Include="DataMart\Mappings\PurchaseFact.hbm.xml" />
+    <Content Include="DataMart\Mappings\PurchasesPerDayAggregateFact.hbm.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SSIS\PeopleSalesWHTOPeopleSalesDM_ETL.dtsx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataMart\Mappings\DateInformation.hbm.xml" />
+    <Content Include="DataMart\Mappings\PurchasesPerPersonPerMonthAggregateFact.hbm.xml" />
+    <Content Include="SSIS\PeopleSalesWHTOPeopleSalesDM_ETL.dtsConfig" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PostBuildEvent>xcopy "$(ProjectDir)DataMart\Mappings\*.xml" "$(TargetDir)HibernateMappings\DataMart" /r /i /c /h /k /e /y &gt;Nul
+xcopy "$(ProjectDir)Warehouse\Mappings\*.xml" "$(TargetDir)HibernateMappings\Warehouse"  /r /i /c /h /k /e /y &gt;Nul</PostBuildEvent>
+  </PropertyGroup>
+</Project>

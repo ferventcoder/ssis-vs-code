@@ -1,0 +1,32 @@
+# Microsoft Developer Studio Project File - Database Project
+Begin DataProject = "WarehouseToDataMart.Database"
+   MSDTVersion = "80"
+   Node = "InstallPeopleSales.cmd"
+   Begin Folder = "PeopleSalesDM"
+      Begin Folder = "DDL"
+         Script = "CreateDMDatabase_DDL.sql"
+         Script = "CreateDMTableStructuresDDL.sql"
+      End
+   End
+   Begin Folder = "PeopleSalesWH"
+      Begin Folder = "DDL"
+         Script = "CreateWHDatabase_DDL.sql"
+         Script = "CreateWHTableStructuresDDL.sql"
+      End
+      Begin Folder = "DML"
+         Script = "MasterDates_Insert.sql"
+         Script = "People_Insert.sql"
+         Script = "Purchases_Insert.sql"
+      End
+      Begin Folder = "Views"
+         Script = "vw_People.sql"
+         Script = "vw_Purchases.sql"
+      End
+   End
+   Begin Folder = "UtilityQueries"
+	  Script = "SelectCountsDM.sql"
+	  Script = "SelectGroupsDM.sql"
+      Script = "Selects.sql"
+   End
+   Node = "PublishDataMart.cmd"
+End

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   schema="dbo"
+                   assembly="WarehouseToDataMart"
+                   namespace="WarehouseToDataMart.DataMart" >
+
+  <class name="PurchasesPerPersonPerMonthAggregateFact" table="PurchasesPersonMonthAggregateFacts" lazy="false" >
+
+    <id name="Id" column="PurchasesMonthAggId" type="Int32" unsaved-value="0" access="field.camelcase-underscore">
+      <generator class="native" />
+    </id>
+
+    <property name="PurchasesTotal" column="PurchasesTotalAmount"  type="Decimal" not-null="true" update="true"  access="field.camelcase-underscore" />
+    <property name="PersonId" type="Int32" not-null="true" update="true" access="field.camelcase-underscore" />
+    <property name="MonthNumber" type="Int32" not-null="true" update="true" access="field.camelcase-underscore" />
+    <property name="MonthName" type="String" not-null="false" update="true" access="field.camelcase-underscore" />
+    
+  </class>
+
+</hibernate-mapping>

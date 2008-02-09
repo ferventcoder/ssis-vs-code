@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   schema="dbo"
+                   assembly="WarehouseToDataMart"
+                   namespace="WarehouseToDataMart.DataMart" >
+
+  <class name="PersonDimension" table="PeopleDim" lazy="false" >
+
+    <id name="Id" column="PersonID" type="Int32" unsaved-value="0" access="field.camelcase-underscore" >
+      <generator class="assigned" />
+    </id>
+    
+    <property name="FirstName" type="String" not-null="false" update="true"  access="field.camelcase-underscore"  />
+    <property name="LastName" type="String"  not-null="false" update="true"  access="field.camelcase-underscore" />
+    <property name="EffectiveDateId" column="EffectiveDateID" type="Int32" not-null="true" update="true"  access="field.camelcase-underscore" />
+    <property name="SystemOfRecordId" column="PersonIDSOR"  type="Int32" not-null="true" update="true"  access="field.camelcase-underscore" />
+    <property name="EffectiveDateFrom" column="EffectiveFromDate"  type="DateTime" not-null="false" update="true"  access="field.camelcase-underscore" />
+   <!-- <property name="EffectiveDateTo" column="EffectiveToDate" type="DateTime" not-null="false" update="false"  access="field.camelcase-underscore" />-->
+
+   <!--<bag name="Purchases" access="field.camelcase-underscore" lazy="false" >
+      <key column="PersonID" />
+      <one-to-many class="Purchase" />
+    </bag>-->
+    
+  </class>
+
+</hibernate-mapping>
