@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<DTSConfiguration>
+  <DTSConfigurationHeading>
+    <DTSConfigurationFileInfo GeneratedBy="d" GeneratedFromPackageName="PeopleSalesWHTOPeopleSalesDM_ETL" GeneratedFromPackageID="{917ECACC-488F-49E6-BB0C-0BCD6A90DB56}" GeneratedDate="02/08/2008 3:14:51 PM"/>
+  </DTSConfigurationHeading>
+  <Configuration ConfiguredType="Property" Path="\Package.Connections[CreateDMTableStructuresDDL.sql].Properties[ConnectionString]" ValueType="String">
+    <ConfiguredValue>E:\CODE\SSIS_vCode\Scripts\CreateDMTableStructuresDDL.sql</ConfiguredValue>
+  </Configuration>
+  <Configuration ConfiguredType="Property" Path="\Package.Variables[User::TransactionDate].Properties[Value]" ValueType="DateTime">
+    <ConfiguredValue>02/19/1982</ConfiguredValue>
+  </Configuration>
+  <Configuration ConfiguredType="Property" Path="\Package.Variables[User::TransactionEndDate].Properties[Value]" ValueType="DateTime">
+    <ConfiguredValue>04/09/2064</ConfiguredValue>
+  </Configuration>
+</DTSConfiguration>

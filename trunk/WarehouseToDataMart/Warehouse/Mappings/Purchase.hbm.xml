@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   schema="dbo"
+                   assembly="WarehouseToDataMart"
+                   namespace="WarehouseToDataMart.Warehouse" >
+
+  <class name="Purchase" table="Purchases" lazy="false" >
+
+    <id name="Id" column="PurchaseId" type="Int32" unsaved-value="0" access="field.camelcase-underscore">
+      <generator class="native" />
+    </id>
+
+    <property name="Amount" column="PurchaseAmount"  type="Decimal" not-null="true" update="true"  access="field.camelcase-underscore" />
+    <property name="NumberOfItems" column="NumberItems"  type="Int32"  not-null="false" update="true"  access="field.camelcase-underscore" />
+    <property name="PersonId" type="Int32" not-null="true" update="false" access="field.camelcase-underscore" />
+    <many-to-one name="PurchaseDate" column="PurchaseDateID"  class="WarehouseToDataMart.Common.DateInformation" access="field.camelcase-underscore" />
+       
+  </class>
+
+</hibernate-mapping>

@@ -1,0 +1,103 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WarehouseToDataMart", "WarehouseToDataMart\WarehouseToDataMart.vbproj", "{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WarehouseToDataMart.Tests", "WarehouseToDataMart.Tests\WarehouseToDataMart.Tests.vbproj", "{7A810F45-6A6F-4C89-A90C-2603CB73C60C}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{5A000AAF-38EE-4659-9DC0-56A0D34CFC17}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MbUnit", "MbUnit", "{B38F1CDC-499E-48DC-AB60-A4E0F6AA6504}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		libs\MbUnit\MbUnit.Framework.dll = libs\MbUnit\MbUnit.Framework.dll
+		libs\MbUnit\QuickGraph.Algorithms.dll = libs\MbUnit\QuickGraph.Algorithms.dll
+		libs\MbUnit\QuickGraph.dll = libs\MbUnit\QuickGraph.dll
+		libs\MbUnit\Refly.dll = libs\MbUnit\Refly.dll
+		libs\MbUnit\TestFu.dll = libs\MbUnit\TestFu.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NHibernate", "NHibernate", "{21892531-9FEF-47D4-986A-A69FA838E76B}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		libs\Nhibernate\Iesi.Collections.dll = libs\Nhibernate\Iesi.Collections.dll
+		libs\Nhibernate\Iesi.Collections.xml = libs\Nhibernate\Iesi.Collections.xml
+		libs\Nhibernate\log4net.dll = libs\Nhibernate\log4net.dll
+		libs\Nhibernate\log4net.xml = libs\Nhibernate\log4net.xml
+		libs\Nhibernate\NHibernate.dll = libs\Nhibernate\NHibernate.dll
+		libs\Nhibernate\NHibernate.xml = libs\Nhibernate\NHibernate.xml
+	EndProjectSection
+EndProject
+Project("{4F174C21-8C12-11D0-8340-0000F80270F8}") = "WarehouseToDataMart.Database", "WarehouseToDataMart.Database\WarehouseToDataMart.Database.dbp", "{55B3DF8C-752B-4AA0-AB26-0EF9021EB0D6}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2F74AC7D-B8B4-4E17-AA89-734EE0E191C4}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		README.txt = README.txt
+	EndProjectSection
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WarehouseToDataMart.Console", "WarehouseToDataMart.Console\WarehouseToDataMart.Console.vbproj", "{B941C968-6E2F-437E-9157-0A784E63A01A}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Development|Any CPU = Development|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA5212BC-78C5-49E6-B1BE-C959B4EC129A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A810F45-6A6F-4C89-A90C-2603CB73C60C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A810F45-6A6F-4C89-A90C-2603CB73C60C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A810F45-6A6F-4C89-A90C-2603CB73C60C}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A810F45-6A6F-4C89-A90C-2603CB73C60C}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{7A810F45-6A6F-4C89-A90C-2603CB73C60C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A810F45-6A6F-4C89-A90C-2603CB73C60C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B941C968-6E2F-437E-9157-0A784E63A01A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B941C968-6E2F-437E-9157-0A784E63A01A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B941C968-6E2F-437E-9157-0A784E63A01A}.Development|Any CPU.ActiveCfg = Debug|Any CPU
+		{B941C968-6E2F-437E-9157-0A784E63A01A}.Development|Any CPU.Build.0 = Debug|Any CPU
+		{B941C968-6E2F-437E-9157-0A784E63A01A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B941C968-6E2F-437E-9157-0A784E63A01A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B38F1CDC-499E-48DC-AB60-A4E0F6AA6504} = {5A000AAF-38EE-4659-9DC0-56A0D34CFC17}
+		{21892531-9FEF-47D4-986A-A69FA838E76B} = {5A000AAF-38EE-4659-9DC0-56A0D34CFC17}
+	EndGlobalSection
+EndGlobal

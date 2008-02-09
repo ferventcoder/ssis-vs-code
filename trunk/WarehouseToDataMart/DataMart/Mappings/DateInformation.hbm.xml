@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+                   schema="dbo"
+                   assembly="WarehouseToDataMart"
+                   namespace="WarehouseToDataMart.Common" >
+
+  <class name="DateInformation" table="MasterDatesDim" lazy="false" >
+
+    <id name="Id" column="DateID" type="Int32" unsaved-value="0" access="field.camelcase-underscore">
+      <generator class="assigned" />
+    </id>
+
+    <property name="CalendarDate" type="DateTime" not-null="true"  update="false" access="field.camelcase-underscore" />
+    <property name="MonthNumber" column="MonthInYearNum" type="Int32" not-null="false"  update="false" access="field.camelcase-underscore" />
+    <property name="MonthName" column="MonthName" type="String" not-null="false"  update="false" access="field.camelcase-underscore" />
+    
+
+  </class>
+
+</hibernate-mapping>
