@@ -1,6 +1,7 @@
 Imports System.Collections.Generic
 Imports System
 Imports System.Configuration
+Imports System.Diagnostics
 Imports WarehouseToDataMart.Common
 Imports WarehouseToDataMart.Warehouse
 Imports WarehouseToDataMart.DataMart
@@ -9,38 +10,49 @@ Imports WarehouseToDataMart.Repositories
 
 Public Class WarehouseMoveProgram
 
-    'TODO: Ask for TraceListeners on New
-    'TODO: Change Console.WriteLine to Trace.WriteLine
+    Private _projectDirectory As String
 
-    Private _projectDirectory As String = ConfigurationManager.AppSettings("ProjectDirectoryPath")
+    Public Sub New()
+        _projectDirectory = ConfigurationManager.AppSettings("ProjectDirectoryPath")
+    End Sub
 
-    Sub Run()
-        Console.WriteLine("Starting the process at {0}", DateTime.Now().ToLongTimeString())
+    Public Sub Run()
+        Trace.WriteLine(String.Format("*").PadRight(35, CChar("*")))
+        Trace.WriteLine(String.Format("-").PadRight(35, CChar("-")))
+        Trace.WriteLine(String.Format("Starting the process at {0}", DateTime.Now().ToLongTimeString()))
+        Trace.WriteLine("")
 
-
-        Console.WriteLine("Running SSIS at {0}", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+        Trace.WriteLine(String.Format("Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
         Dim startTicks As Long = DateTime.Now.Ticks()
         'MoveDataWithSSIS()
         Dim endTicks As Long = DateTime.Now.Ticks()
+        Trace.WriteLine(String.Format("Finished Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
 
-        Console.WriteLine("Running the SSIS Package to move data from the warehouse to the data mart took {0} ticks", (endTicks - startTicks))
-        '_logger.Debug("Running the SSIS Package took a total of {0} ticks.", (endTicks - startTicks))
-        Console.WriteLine("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds)
-        Console.WriteLine("Time is {0}", DateTime.Now().ToLongTimeString())
-        Console.WriteLine("")
+        Trace.WriteLine(String.Format("Running the SSIS Package to move data from the warehouse to the data mart took {0} ticks", (endTicks - startTicks)))
+        Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
+        Trace.WriteLine(String.Format("Time is {0}", DateTime.Now().ToLongTimeString()))
+        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
 
-        Console.WriteLine("Running Code at {0}", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format(""))
+
+        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+        Trace.WriteLine(String.Format("Running Code at {0}", DateTime.Now().ToLongTimeString()))
         startTicks = DateTime.Now.Ticks()
-        MoveDataWithCode()
+        'MoveDataWithCode()
         endTicks = DateTime.Now.Ticks()
+        Trace.WriteLine(String.Format("Finished Running Code at {0}", DateTime.Now().ToLongTimeString()))
 
-        Console.WriteLine("Running code to move objects from the warehouse to the data mart took {0} ticks.", (endTicks - startTicks))
-        '_logger.Debug("Running the code took a total of {0} ticks.", (endTicks - startTicks))
-        Console.WriteLine("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds)
-        Console.WriteLine("Time is {0}", DateTime.Now().ToLongTimeString())
-        Console.WriteLine("")
-        Console.WriteLine("Please hit enter to continue...")
-        Console.ReadLine()
+        Trace.WriteLine(String.Format("Running code to move objects from the warehouse to the data mart took {0} ticks.", (endTicks - startTicks)))
+        Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
+        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+
+        Trace.WriteLine("")
+        Trace.WriteLine(String.Format("Finished the process at {0}", DateTime.Now().ToLongTimeString()))
+        Trace.WriteLine(String.Format("-").PadRight(35, CChar("-")))
+        Trace.WriteLine(String.Format("*").PadRight(35, CChar("*")))
+
+        Trace.Close()
     End Sub
 
     Private Sub MoveDataWithSSIS()
@@ -54,57 +66,74 @@ Public Class WarehouseMoveProgram
     End Sub
 
     Private Sub MoveDataWithCode()
-        Console.WriteLine("Starting Republish at {0}.", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("Starting Republish at {0}.", DateTime.Now().ToLongTimeString()))
         RepublishDataMartStructure()
-        Console.WriteLine("Finished Republish at {0}.", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("Finished Republish at {0}.", DateTime.Now().ToLongTimeString()))
 
         ' set date range to move = 50 years
-        ' NOT worried about the top for this example - gonna have both move the high amounts of data
+        ' NOT worried about this for this example - gonna have both move the high amounts of data
 
-        ' move date Info objects
-        Console.WriteLine("Getting date objects at {0}.", DateTime.Now().ToLongTimeString())
+        ' date objects
+        Trace.WriteLine(String.Format("Getting date objects at {0}.", DateTime.Now().ToLongTimeString()))
         Dim dateInfo As IList(Of DateInformation) = New Repository(Of DateInformation)(HibernateWarehouseMapperFactory.SessionFactory).GetAll()
+        Trace.WriteLine(String.Format("Finished Getting date objects at {0}.", DateTime.Now().ToLongTimeString()))
+
+        Trace.WriteLine(String.Format("Saving date dimensions at {0}.", DateTime.Now().ToLongTimeString()))
         Dim dateInfoDimRepository As IRepository(Of DateInformation) = New Repository(Of DateInformation)(HibernateDataMartMapperFactory.SessionFactory)
-        Console.WriteLine("Saving date dimensions at {0}.", DateTime.Now().ToLongTimeString())
         dateInfoDimRepository.Save(dateInfo)
+        Trace.WriteLine(String.Format("Finished Saving date dimensions at {0}.", DateTime.Now().ToLongTimeString()))
 
         dateInfo = Nothing
+        dateInfoDimRepository = Nothing
 
-        ' move person objects
-        Console.WriteLine("Getting person objects at {0}.", DateTime.Now().ToLongTimeString())
+        ' person objects
+        Trace.WriteLine(String.Format("Getting person objects at {0}.", DateTime.Now().ToLongTimeString()))
         Dim people As IList(Of Person) = New Repository(Of Person)(HibernateWarehouseMapperFactory.SessionFactory).GetAll()
-        Console.WriteLine("Pushing person objects into dimensions at {0}.", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("Finished Getting person objects at {0}.", DateTime.Now().ToLongTimeString()))
+
+        Trace.WriteLine(String.Format("Pushing person objects into dimensions at {0}.", DateTime.Now().ToLongTimeString()))
         Dim peopleDimension As IList(Of PersonDimension) = SetUpPersonDimensions(people)
+        Trace.WriteLine(String.Format("Finished Pushing person objects into dimensions at {0}.", DateTime.Now().ToLongTimeString()))
 
         people = Nothing
 
+        Trace.WriteLine(String.Format("Saving person dimensions at {0}.", DateTime.Now().ToLongTimeString()))
         Dim peopleDimRepository As IRepository(Of PersonDimension) = New Repository(Of PersonDimension)(HibernateDataMartMapperFactory.SessionFactory)
-        Console.WriteLine("Saving person dimensions at {0}.", DateTime.Now().ToLongTimeString())
         peopleDimRepository.Save(peopleDimension)
+        Trace.WriteLine(String.Format("Finished Saving person dimensions at {0}.", DateTime.Now().ToLongTimeString()))
 
         peopleDimension = Nothing
+        peopleDimRepository = Nothing
 
         ' move purchase objects
-        Console.WriteLine("Getting purchase objects at {0}.", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("Getting purchase objects at {0}.", DateTime.Now().ToLongTimeString()))
         Dim purchases As IList(Of Purchase) = New Repository(Of Purchase)(HibernateWarehouseMapperFactory.SessionFactory).GetAll()
-        Console.WriteLine("Pushing purchase objects into facts at {0}.", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("Finished Getting purchase objects at {0}.", DateTime.Now().ToLongTimeString()))
+
+        Trace.WriteLine(String.Format("Pushing purchase objects into facts at {0}.", DateTime.Now().ToLongTimeString()))
         Dim purchaseFacts As IList(Of PurchaseFact) = SetUpPurchaseFacts(purchases)
+        Trace.WriteLine(String.Format("Finished Pushing purchase objects into facts at {0}.", DateTime.Now().ToLongTimeString()))
 
         purchases = Nothing
 
+        Trace.WriteLine(String.Format("Saving purchase facts at {0}.", DateTime.Now().ToLongTimeString()))
         Dim purchaseFactsRepository As IRepository(Of PurchaseFact) = New Repository(Of PurchaseFact)(HibernateDataMartMapperFactory.SessionFactory)
-        Console.WriteLine("Saving purchase facts at {0}.", DateTime.Now().ToLongTimeString())
         purchaseFactsRepository.Save(purchaseFacts)
+        Trace.WriteLine(String.Format("Finished Saving purchase facts at {0}.", DateTime.Now().ToLongTimeString()))
 
         purchaseFacts = Nothing
-
+        purchaseFactsRepository = Nothing
 
         ' run aggregation
-        Console.WriteLine("Aggregating Purchases Per Day Facts at {0}.", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("Aggregating Purchases Per Day Facts at {0}.", DateTime.Now().ToLongTimeString()))
         AggregatePurchasesPerDay()
-        'Console.WriteLine("Aggregating Purchases Per Person Per Month Facts at {0}.", DateTime.Now().ToLongTimeString())
+        Trace.WriteLine(String.Format("Finished Aggregating Purchases Per Day Facts at {0}.", DateTime.Now().ToLongTimeString()))
+
+        'Trace.WriteLine(String.Format("Aggregating Purchases Per Person Per Month Facts at {0}.", DateTime.Now().ToLongTimeString()))
         'AggregatePurchasesPerPersonPerMonth()
-        Console.WriteLine("")
+        'Trace.WriteLine(String.Format("Finished Aggregating Purchases Per Person Per Month Facts at {0}.", DateTime.Now().ToLongTimeString()))
+
+        Trace.WriteLine(String.Format(""))
     End Sub
 
     Private Sub RepublishDataMartStructure()

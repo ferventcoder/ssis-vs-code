@@ -4,12 +4,13 @@ Summary:
 
 Prerequisites:
  -VS2005
- -SQLServer 2005
+ -SQLServer 2005 installed on your local system (or edit database locations)
  -MbUnit Installed on the system
  
 Setup: 
  -To get started, locate the file called "InstallPeopleSales.cmd" in 
-	WarehouseToDataMart.Database and run the file.
+	WarehouseToDataMart.Database and run the file.  
+	If you you open it with the run command in Visual Studio, leave everything blank and hit OK.
 
 Known Issues:
  -The NHibernate mapping files are mapped to a specific directory.  
