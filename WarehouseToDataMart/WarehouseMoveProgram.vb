@@ -25,7 +25,7 @@ Public Class WarehouseMoveProgram
         Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
         Trace.WriteLine(String.Format("Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
         Dim startTicks As Long = DateTime.Now.Ticks()
-        'MoveDataWithSSIS()
+        MoveDataWithSSIS()
         Dim endTicks As Long = DateTime.Now.Ticks()
         Trace.WriteLine(String.Format("Finished Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
 
@@ -39,7 +39,7 @@ Public Class WarehouseMoveProgram
         Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
         Trace.WriteLine(String.Format("Running Code at {0}", DateTime.Now().ToLongTimeString()))
         startTicks = DateTime.Now.Ticks()
-        'MoveDataWithCode()
+        MoveDataWithCode()
         endTicks = DateTime.Now.Ticks()
         Trace.WriteLine(String.Format("Finished Running Code at {0}", DateTime.Now().ToLongTimeString()))
 
@@ -56,11 +56,11 @@ Public Class WarehouseMoveProgram
     End Sub
 
     Private Sub MoveDataWithSSIS()
-        Dim filePath As String = _projectDirectory & ConfigurationManager.AppSettings("SSISPackageFilePath")
-        Dim fileName As String = ConfigurationManager.AppSettings("SSISPackageName")
+        Dim path As String = _projectDirectory & ConfigurationManager.AppSettings("SSISPackageFilePath")
+        Dim ssisFileName As String = ConfigurationManager.AppSettings("SSISPackageName")
         Dim configFileName As String = ConfigurationManager.AppSettings("SSISConfigName")
         Dim cmdToExecute As String = "dtexec.exe"
-        Dim parameters As String = String.Format(" /FILE ""{0}"" /CONFIGFILE ""{1}""", filePath & fileName, filePath & configFileName)
+        Dim parameters As String = String.Format(" /FILE ""{0}"" /CONFIGFILE ""{1}""", path & ssisFileName, path & configFileName)
 
         Shell(cmdToExecute & parameters, AppWinStyle.Hide, True)
     End Sub
