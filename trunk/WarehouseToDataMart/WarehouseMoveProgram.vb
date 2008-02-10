@@ -31,10 +31,13 @@ Public Class WarehouseMoveProgram
 
         Trace.WriteLine(String.Format("Running the SSIS Package to move data from the warehouse to the data mart took {0} ticks", (endTicks - startTicks)))
         Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
-        Trace.WriteLine(String.Format("Time is {0}", DateTime.Now().ToLongTimeString()))
+        Trace.WriteLine(String.Format("A total of {0}:{1} minutes.", _
+            CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) \ 60, _
+            (CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) Mod 60).ToString().PadLeft(2, CChar("0"))))
         Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
 
         Trace.WriteLine(String.Format(""))
+        Trace.Flush()
 
         Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
         Trace.WriteLine(String.Format("Running Code at {0}", DateTime.Now().ToLongTimeString()))
@@ -45,6 +48,9 @@ Public Class WarehouseMoveProgram
 
         Trace.WriteLine(String.Format("Running code to move objects from the warehouse to the data mart took {0} ticks.", (endTicks - startTicks)))
         Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
+        Trace.WriteLine(String.Format("A total of {0}:{1} minutes.", _
+            CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) \ 60, _
+            (CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) Mod 60).ToString().PadLeft(2, CChar("0"))))
         Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
 
         Trace.WriteLine("")
