@@ -11,6 +11,9 @@ Setup:
  -To get started, locate the file called "InstallPeopleSales.cmd" in 
 	WarehouseToDataMart.Database and run the file.  
 	If you you open it with the run command in Visual Studio, leave everything blank and hit OK.
+ -If you are not going to your local database, you will need to edit the app.config file, 
+	the DTSConfig file, the PublishDataMart.cmd, and the InstallPeopleSales.cmd. 
+	(I know, not very DRY). It's a sample folks! :D
 
 Known Issues:
  -The NHibernate mapping files are mapped to a specific directory.  
