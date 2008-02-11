@@ -21,7 +21,9 @@
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>WarehouseToDataMart.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42024,42025,42029,42030,42031,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,7 +32,9 @@
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>WarehouseToDataMart.xml</DocumentationFile>
-    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <NoWarn>
+    </NoWarn>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42024,42025,42029,42030,42031,42032,42036,42104,42105,42106,42107,42108,42109</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MbUnit.Framework, Version=2.41.232.0, Culture=neutral, PublicKeyToken=5e72ecd30bc408d5">
@@ -44,7 +48,6 @@
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\DateInformation.vb" />
@@ -63,19 +66,35 @@
     <Compile Include="Repositories\Repository.vb" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Warehouse\Mappings\DateInformation.hbm.xml" />
-    <Content Include="Warehouse\Mappings\Person.hbm.xml" />
-    <Content Include="DataMart\Mappings\PersonDimension.hbm.xml" />
-    <Content Include="Warehouse\Mappings\Purchase.hbm.xml" />
-    <Content Include="DataMart\Mappings\PurchaseFact.hbm.xml" />
-    <Content Include="DataMart\Mappings\PurchasesPerDayAggregateFact.hbm.xml" />
+    <Content Include="HibernateMappings\Warehouse\DateInformation.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HibernateMappings\Warehouse\Person.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HibernateMappings\DataMart\PersonDimension.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HibernateMappings\Warehouse\Purchase.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HibernateMappings\DataMart\PurchaseFact.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HibernateMappings\DataMart\PurchasesPerDayAggregateFact.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="SSIS\PeopleSalesWHTOPeopleSalesDM_ETL.dtsx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DataMart\Mappings\DateInformation.hbm.xml" />
-    <Content Include="DataMart\Mappings\PurchasesPerPersonPerMonthAggregateFact.hbm.xml" />
+    <Content Include="HibernateMappings\DataMart\DateInformation.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HibernateMappings\DataMart\PurchasesPerPersonPerMonthAggregateFact.hbm.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="SSIS\PeopleSalesWHTOPeopleSalesDM_ETL.dtsConfig" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
@@ -87,7 +106,7 @@
   </Target>
   -->
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(ProjectDir)DataMart\Mappings\*.xml" "$(TargetDir)HibernateMappings\DataMart" /r /i /c /h /k /e /y &gt;Nul
-xcopy "$(ProjectDir)Warehouse\Mappings\*.xml" "$(TargetDir)HibernateMappings\Warehouse"  /r /i /c /h /k /e /y &gt;Nul</PostBuildEvent>
+    <PostBuildEvent>::xcopy "$(ProjectDir)DataMart\Mappings\*.xml" "$(TargetDir)HibernateMappings\DataMart" /r /i /c /h /k /e /y &gt;Nul
+::xcopy "$(ProjectDir)Warehouse\Mappings\*.xml" "$(TargetDir)HibernateMappings\Warehouse"  /r /i /c /h /k /e /y &gt;Nul</PostBuildEvent>
   </PropertyGroup>
 </Project>
