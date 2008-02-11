@@ -22,42 +22,55 @@ Public Class WarehouseMoveProgram
         Trace.WriteLine(String.Format("Starting the process at {0}", DateTime.Now().ToLongTimeString()))
         Trace.WriteLine("")
 
-        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
-        Trace.WriteLine(String.Format("Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
-        Dim startTicks As Long = DateTime.Now.Ticks()
-        MoveDataWithSSIS()
-        Dim endTicks As Long = DateTime.Now.Ticks()
-        Trace.WriteLine(String.Format("Finished Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
+        Dim startTicks As Long
+        Dim endTicks As Long
 
-        Trace.WriteLine(String.Format("Running the SSIS Package to move data from the warehouse to the data mart took {0} ticks", (endTicks - startTicks)))
-        Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
-        Trace.WriteLine(String.Format("A total of {0}:{1} minutes.", _
-            CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) \ 60, _
-            (CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) Mod 60).ToString().PadLeft(2, CChar("0"))))
-        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
 
-        Trace.WriteLine(String.Format(""))
+        If (ConfigurationManager.AppSettings("EnableSSIS") = "true") Then
+            Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+            Trace.WriteLine(String.Format("Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
+
+            startTicks = DateTime.Now.Ticks()
+            MoveDataWithSSIS()
+            endTicks = DateTime.Now.Ticks()
+
+            Trace.WriteLine(String.Format("Finished Running SSIS at {0}", DateTime.Now().ToLongTimeString()))
+            Trace.WriteLine(String.Format("Running the SSIS Package to move data from the warehouse to the data mart took {0} ticks", (endTicks - startTicks)))
+            Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
+            Trace.WriteLine(String.Format("A total of {0}:{1} minutes.", _
+                CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) \ 60, _
+                (CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) Mod 60).ToString().PadLeft(2, CChar("0"))))
+            Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+
+            Trace.WriteLine(String.Format(""))
+        End If
+
         Trace.Flush()
 
-        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
-        Trace.WriteLine(String.Format("Running Code at {0}", DateTime.Now().ToLongTimeString()))
-        startTicks = DateTime.Now.Ticks()
-        MoveDataWithCode()
-        endTicks = DateTime.Now.Ticks()
-        Trace.WriteLine(String.Format("Finished Running Code at {0}", DateTime.Now().ToLongTimeString()))
+        If (ConfigurationManager.AppSettings("EnableCode") = "true") Then
+            Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+            Trace.WriteLine(String.Format("Running Code at {0}", DateTime.Now().ToLongTimeString()))
 
-        Trace.WriteLine(String.Format("Running code to move objects from the warehouse to the data mart took {0} ticks.", (endTicks - startTicks)))
-        Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
-        Trace.WriteLine(String.Format("A total of {0}:{1} minutes.", _
-            CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) \ 60, _
-            (CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) Mod 60).ToString().PadLeft(2, CChar("0"))))
-        Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+            startTicks = DateTime.Now.Ticks()
+            MoveDataWithCode()
+            endTicks = DateTime.Now.Ticks()
 
-        Trace.WriteLine("")
+            Trace.WriteLine(String.Format("Finished Running Code at {0}", DateTime.Now().ToLongTimeString()))
+            Trace.WriteLine(String.Format("Running code to move objects from the warehouse to the data mart took {0} ticks.", (endTicks - startTicks)))
+            Trace.WriteLine(String.Format("That is a total of {0} seconds.", TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds))
+            Trace.WriteLine(String.Format("A total of {0}:{1} minutes.", _
+                CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) \ 60, _
+                (CLng(TimeSpan.FromTicks(endTicks - startTicks).TotalSeconds) Mod 60).ToString().PadLeft(2, CChar("0"))))
+            Trace.WriteLine(String.Format("-").PadRight(25, CChar("-")))
+
+            Trace.WriteLine("")
+        End If
+
         Trace.WriteLine(String.Format("Finished the process at {0}", DateTime.Now().ToLongTimeString()))
         Trace.WriteLine(String.Format("-").PadRight(35, CChar("-")))
         Trace.WriteLine(String.Format("*").PadRight(35, CChar("*")))
 
+        Trace.Flush()
         Trace.Close()
     End Sub
 
