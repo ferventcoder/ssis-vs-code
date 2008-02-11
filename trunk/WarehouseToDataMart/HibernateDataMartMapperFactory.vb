@@ -9,11 +9,10 @@ Public Class HibernateDataMartMapperFactory
     Public Shared ReadOnly Property SessionFactory() As ISessionFactory
         Get
             If (_factory Is Nothing) Then
-                Dim database As String = "PeopleSalesDM"
                 Dim projectDirectory As String = ConfigurationManager.AppSettings("ProjectDirectoryPath")
                 Dim filePath As String = projectDirectory & ConfigurationManager.AppSettings("HibernateMappingFilePath") & "DataMart"
                 Dim config As Cfg.Configuration = New Cfg.Configuration()
-                Dim cn As String = String.Format("Server=localhost;initial catalog={0};Trusted_Connection=yes", database)
+                Dim cn As String = ConfigurationManager.ConnectionStrings("DataMart").ConnectionString()
                 config.SetProperty("hibernate.connection.provider", "NHibernate.Connection.DriverConnectionProvider")
                 config.SetProperty("hibernate.connection.driver_class", "NHibernate.Driver.SqlClientDriver")
                 config.SetProperty("hibernate.connection.connection_string", cn)
